@@ -1,36 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 
 public class Passageiro : MonoBehaviour
 {
 
-    [SerializeField] private int idade;  //10-90?
-    [SerializeField] private float altura;  //1,48 - 1,98
-    [SerializeField] private float dinheiroParaPassagem; //
-    private enum CorDaRoupa
+     public int idade;  //10-90?
+     public float altura;  //1,48 - 1,98
+     public float dinheiroParaPassagem; //
+    public enum TipoPagamento
+    {
+        Cartão,
+        Dinheiro
+    }
+    public TipoPagamento tipoPagamento;
+    public enum CorDaRoupa
     {
         Azul,
         Verde,
         Vermelho
     }
-    [SerializeField] private CorDaRoupa corRoupa;
-    private enum TimeFutebol
+     public CorDaRoupa corRoupa;
+    public enum TimeFutebol
     {
         Palmeiras,
         Corinthians,
         Cruzeiro
     }
-    [SerializeField] private  TimeFutebol timeFutebol;
-    private enum Profissao
+     public  TimeFutebol timeFutebol;
+    public enum Profissao
     {
         Advogado,
         Medico,
         Programador
     }
-    [SerializeField] private  Profissao profissao;
-    private enum GeracaoPokemon
+     public  Profissao profissao;
+    public enum GeracaoPokemon
     {
         Kanto,
         Johto,
@@ -41,8 +49,8 @@ public class Passageiro : MonoBehaviour
         Alola,
         Galar
     }
-    [SerializeField] private GeracaoPokemon geracaoPokemon;
-    private enum RoleLOL
+     public GeracaoPokemon geracaoPokemon;
+    public enum RoleLOL
     {
         Top,
         Jungle,
@@ -50,30 +58,33 @@ public class Passageiro : MonoBehaviour
         ADC,
         Suporte
     }
-    [SerializeField] private RoleLOL roleLOL;
+     public RoleLOL roleLOL;
 
-    private enum CorDoCabelo
+    public enum CorDoCabelo
     {
         Preto,
         Loiro,
         Ruivo
     }
-    [SerializeField] private CorDoCabelo corCabelo;
-    private enum Acessorios
+     public CorDoCabelo corCabelo;
+    public enum Acessorios
     {
         Corrente,
         Pulseira,
         Brinco
     }
-    [SerializeField] private  Acessorios acessorios;
+     public  Acessorios acessorios;
 
 
+    private GameObject ficha;
 
-    private void Start()
+
+    public void Start()
     {
         idade = Random.Range(15, 90);
         altura = Random.Range(1.50f, 1.90f);
         altura = Mathf.Round(altura * 100.0f) * 0.01f;
+        tipoPagamento = (TipoPagamento)Random.Range(0, 2);
         dinheiroParaPassagem = Random.Range(1.50f, 1.90f);
         dinheiroParaPassagem = Mathf.Round(dinheiroParaPassagem * 100.0f) * 0.01f;
         corRoupa = (CorDaRoupa)Random.Range(0, 3);
@@ -84,5 +95,17 @@ public class Passageiro : MonoBehaviour
         corCabelo = (CorDoCabelo)Random.Range(0, 3);
         acessorios = (Acessorios)Random.Range(0, 3);
 
+
+        ficha = GameObject.Find("InformacoesFicha");
+        ficha.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Idade" +"\n" +idade.ToString();
+        ficha.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Altura" + "\n" + altura.ToString();
+        ficha.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Dinheiro" + "\n" + dinheiroParaPassagem.ToString();
+        ficha.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Time" + "\n" + timeFutebol.ToString();
+        ficha.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = "Profissao" + "\n" + profissao.ToString();
+        ficha.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = "Pokemon" + "\n" + geracaoPokemon.ToString();
+        ficha.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = "RoleLol" + "\n" + roleLOL.ToString();
+        ficha.transform.GetChild(8).GetComponent<TextMeshProUGUI>().text = "Acessorios" + "\n" + acessorios.ToString();
+
+        GameObject.FindObjectOfType<SistemaPontuacao>().passageiroExaminado = this;
     }
 }
