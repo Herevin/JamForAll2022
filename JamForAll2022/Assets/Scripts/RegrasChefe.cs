@@ -41,7 +41,7 @@ public class RegrasChefe : Passageiro
                     avaliacoes[randomizador] = true;
                     idade = Random.Range(30, 61);
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = idade < 45 ? "Maiores que" + idade + " idade" : "Menores que" + idade + " idade";
+                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = idade < 45 ? "Menores que" + idade + " idade" : "Maiores que" + idade + " idade";
                     break;
                 case 1:
                     if (avaliacoes[randomizador]) break;
@@ -49,7 +49,7 @@ public class RegrasChefe : Passageiro
                     altura = Random.Range(1.65f, 1.75f);
                     altura = Mathf.Round(altura * 100.0f) * 0.01f;
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = altura < 1.7f ? "Maiores que" + altura + " de altura" : "Menores que" + altura + " de altura";
+                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = altura < 1.7f ? "Menores que" + altura + " de altura" : "Maiores que" + altura + " de altura";
 
                     break;
                 case 2:

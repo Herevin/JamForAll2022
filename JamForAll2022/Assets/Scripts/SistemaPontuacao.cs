@@ -42,7 +42,7 @@ public class SistemaPontuacao : MonoBehaviour
                 switch (i)
                 {
                     case 0:
-                        if (regras.idade < 45 ? regras.idade < passageiroExaminado.idade : regras.idade > passageiroExaminado.idade)
+                        if (regras.idade < 45 ? regras.idade > passageiroExaminado.idade: regras.idade < passageiroExaminado.idade)
                         {
                             Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
                             Vector3 temp = passageiroExaminado.transform.position;
@@ -57,7 +57,7 @@ public class SistemaPontuacao : MonoBehaviour
                         }
                         break;
                     case 1:
-                        if (regras.altura < 1.7f ? regras.altura < passageiroExaminado.altura : regras.altura > passageiroExaminado.altura)
+                        if (regras.altura < 1.7f ? regras.altura > passageiroExaminado.altura : regras.altura < passageiroExaminado.altura)
                         {
                             Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
                             Vector3 temp = passageiroExaminado.transform.position;
@@ -275,7 +275,7 @@ public class SistemaPontuacao : MonoBehaviour
                 switch (i)
                 {
                     case 0:
-                        if (regras.idade < 45 ? regras.idade > passageiroExaminado.idade : regras.idade < passageiroExaminado.idade)
+                        if (regras.idade < 45 ? regras.idade  > passageiroExaminado.idade : regras.idade < passageiroExaminado.idade)
                         {
                             Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
                             Vector3 temp = passageiroExaminado.transform.position;
