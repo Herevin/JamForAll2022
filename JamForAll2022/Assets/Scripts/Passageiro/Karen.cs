@@ -83,16 +83,16 @@ public class Karen : Passageiro
         ficha.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Altura" + "\n" + altura.ToString();
         ficha.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Destino" + "\n" + destino.ToString();
         ficha.transform.GetChild(4).GetComponent<SpriteRenderer>().sprite = fotoCorresponde ? mySprite : wrongSprite[Random.Range(0, wrongSprite.Length)];
-        ficha.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = "Time" + "\n" + timeFutebol.ToString();
-        ficha.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = "Profissao" + "\n" + profissao.ToString();
-        ficha.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = "Pokemon" + "\n" + geracaoPokemon.ToString();
-        ficha.transform.GetChild(8).GetComponent<TextMeshProUGUI>().text = "RoleLol" + "\n" + roleLOL.ToString();
+        ficha.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = "";
+        ficha.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = "";
+        ficha.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = "";
+        ficha.transform.GetChild(8).GetComponent<TextMeshProUGUI>().text = "";
         if (!naoPossuiAcc) ficha.transform.GetChild(9).GetComponent<TextMeshProUGUI>().text = "Acessorios" + "\n" + acessorios.ToString();
         if (naoPossuiAcc) ficha.transform.GetChild(9).GetComponent<TextMeshProUGUI>().text = "Acessorios" + "\n" + "Nenhum";
 
 
         GameObject.FindObjectOfType<SistemaPontuacao>().passageiroExaminado = this;
-
+        GameObject.FindObjectOfType<Questionamento>().passageiro = this;
 
 
     }

@@ -35,8 +35,7 @@ public class RegrasChefe : Passageiro
         ResetarBooleanas();
 
         while (quantidade > 0)
-        {
-            
+        {            
             int randomizador = Random.Range(0, 11);
             switch (randomizador)
             {
