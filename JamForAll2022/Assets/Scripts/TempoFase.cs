@@ -8,17 +8,20 @@ public class TempoFase : MonoBehaviour
 {
     public int minutos;
     public int segundos;
-    static int dia;
+    public static int dia;
     [SerializeField]
     private Text textoMinutos;
     [SerializeField]
     private Text textoSegundos;
     [SerializeField]
-    private Text textoDia;
+    public Text textoDia;
+    RegrasChefe randomTraits;
 
     void Start()
     {
         StartCoroutine("Contar");
+        textoDia.text = dia.ToString();
+        randomTraits = GameObject.FindObjectOfType<RegrasChefe>();
     }
 
     void Update()
@@ -31,25 +34,41 @@ public class TempoFase : MonoBehaviour
             segundos = 59;
         }
 
-        if(minutos <= 2) {
-            //Condicao
+        if(minutos <= 0 && segundos <= 1) {
+            ReiniciarBotao();
         }
 
-        if(minutos <= 0 && segundos <= 1){
-            ReiniciarBotao();
+        if(minutos == 2 && segundos == 1) {
+            ChamarTraitsNovas();
+        }
+
+        if(dia == 2 || dia == 3) {
+            if(minutos == 3 && segundos == 30) {
+                ChamarTraitsNovas();
+            }
+            if(minutos == 2 && segundos == 1) {
+                ChamarTraitsNovas();
+            }
+        }
+
+        if(dia >= 4) {
+            if(minutos == 3 && segundos == 30) {
+                ChamarTraitsNovas();
+            }
+            if(minutos == 2 && segundos == 1) {
+                ChamarTraitsNovas();
+            } 
+            if(minutos == 1 && segundos == 1) {
+                ChamarTraitsNovas();
+            }
         }
     }
 
     public void ReiniciarBotao() {
         textoDia.text = dia.ToString();
         dia++;
-        Dia();
         SceneManager.LoadScene("TransicaoDia");
         Time.timeScale = 1;
-    }
-
-    public void Dia(){
-        if(dia >= 1) Debug.Log("Dia");
     }
 
     IEnumerator Contar() {
@@ -58,5 +77,9 @@ public class TempoFase : MonoBehaviour
             segundos--;
             yield return null;
         }
+    }
+
+    public void ChamarTraitsNovas() {
+        randomTraits.RandomizarRegra(3);
     }
 }

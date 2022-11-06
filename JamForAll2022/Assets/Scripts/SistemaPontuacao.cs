@@ -11,7 +11,7 @@ public class SistemaPontuacao : MonoBehaviour
     [SerializeField] private Slider pontosChefeSlider;
     [SerializeField] private Slider pontosPublicoSlider;
 
-    [SerializeField] private int score;
+    [SerializeField] private static int score;
     [SerializeField] private Text scoreText;
 
     public Passageiro passageiroExaminado;
@@ -33,6 +33,7 @@ public class SistemaPontuacao : MonoBehaviour
     {     
         pontosChefeSlider.value = (float)pontosChefe/100;
         pontosPublicoSlider.value = (float)pontosPublico/100;
+        scoreText.text = score.ToString();
     }
     public void AceitarPassageiro()
     {
