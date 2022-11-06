@@ -73,16 +73,21 @@ public class Karen : Passageiro
         }
 
 
-        tipoPagamento = (TipoPagamento)Random.Range(0, 2);
-        if (tipoPagamento == TipoPagamento.Dinheiro) dinheiroParaPassagem = Random.Range(7.5f, 10f);
+        float[] valoresDin = new float[13];
+        valoresDin[0] = 6.5f; valoresDin[1] = 7.5f; valoresDin[2] = 8.5f; valoresDin[3] = 9.5f; valoresDin[4] = 10.5f; valoresDin[5] = 11.5f; valoresDin[6] = 12.5f;
+        valoresDin[7] = 7f; valoresDin[8] = 8f; valoresDin[9] = 9f; valoresDin[10] = 10f; valoresDin[11] = 11f; valoresDin[12] = 12f;
+        dinheiroParaPassagem = valoresDin[Random.Range(0, 13)];
         dinheiroParaPassagem = Mathf.Round(dinheiroParaPassagem * 100.0f) * 0.01f;
+
+        moedasInt = (int)dinheiroParaPassagem / 2;
+        moedasMei = (int)((dinheiroParaPassagem - (float)moedasInt) / .5f);
 
 
         ficha = GameObject.Find("InformacoesFicha");
         ficha.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Idade" + "\n" + idade.ToString();
         ficha.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Altura" + "\n" + altura.ToString();
         ficha.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Destino" + "\n" + destino.ToString();
-        ficha.transform.GetChild(4).GetComponent<SpriteRenderer>().sprite = fotoCorresponde ? mySprite : wrongSprite[Random.Range(0, wrongSprite.Length)];
+        ficha.transform.GetChild(4).GetComponent<Image>().sprite = fotoCorresponde ? mySprite : wrongSprite[Random.Range(0, wrongSprite.Length)];
         ficha.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = "";
         ficha.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = "";
         ficha.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = "";

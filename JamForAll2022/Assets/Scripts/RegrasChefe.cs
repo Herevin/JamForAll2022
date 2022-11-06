@@ -27,6 +27,7 @@ public class RegrasChefe : Passageiro
     private void Start()
     {
         RandomizarRegra(3);
+        dinheiroParaPassagem = 8;
     }
     public void RandomizarRegra(int quantidade)
     {
@@ -36,7 +37,7 @@ public class RegrasChefe : Passageiro
 
         while (quantidade > 0)
         {            
-            int randomizador = Random.Range(0, 11);
+            int randomizador = Random.Range(0, 10);
             switch (randomizador)
             {
                 case 0:
@@ -142,7 +143,8 @@ public class RegrasChefe : Passageiro
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = acessorios.ToString();
                     break;
-             
+                
+
             }
             quantidade--;
         }
