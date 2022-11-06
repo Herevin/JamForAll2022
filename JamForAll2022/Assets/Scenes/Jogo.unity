@@ -405,6 +405,8 @@ MonoBehaviour:
   pontosChefe: 50
   pontosPublico: 50
   proximoPassageiro: {fileID: 8810230772250512996, guid: 7026c7db145a37845bf960eea0676493, type: 3}
+  pontosChefeSlider: {fileID: 944864376}
+  pontosPublicoSlider: {fileID: 860364477}
   passageiroExaminado: {fileID: 0}
   regras: {fileID: 811456795}
 --- !u!1 &196008520
@@ -2966,16 +2968,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idade: 0
   altura: 0
-  dinheiroParaPassagem: 0
-  tipoPagamento: 0
-  corRoupa: 0
+  fotoCorresponde: 0
+  destino: 0
   timeFutebol: 0
   profissao: 0
   geracaoPokemon: 0
   roleLOL: 0
-  corCabelo: 0
   acessorios: 0
-  avaliacoes: 00000000000000000000
+  tipoPagamento: 0
+  dinheiroParaPassagem: 0
+  avaliacoes: 0000000000000000000000
   regras:
   - {fileID: 696153349}
   - {fileID: 892264427}
@@ -5600,7 +5602,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
