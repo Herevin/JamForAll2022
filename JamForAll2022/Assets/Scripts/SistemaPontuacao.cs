@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SistemaPontuacao : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class SistemaPontuacao : MonoBehaviour
     [SerializeField] private GameObject[] proximoPassageiro;
     [SerializeField] private Slider pontosChefeSlider;
     [SerializeField] private Slider pontosPublicoSlider;
+    [SerializeField] private GameObject cobrancaGO;
 
     [SerializeField] private static int score;
     [SerializeField] private Text scoreText;
@@ -37,6 +39,16 @@ public class SistemaPontuacao : MonoBehaviour
     }
     public void AceitarPassageiro()
     {
+        if(regras.dinheiroParaPassagem  > passageiroExaminado.dinheiroParaPassagem)
+        {
+            AumentarDiminuirPontos(-15, 5);
+            AumentarScore(15);
+            Vector3 temp = passageiroExaminado.transform.position;
+            Destroy(passageiroExaminado.gameObject);
+            Instantiate(proximoPassageiro[Random.Range(0, proximoPassageiro.Length)], temp, Quaternion.identity);
+            return;
+        }
+
         int quantidadeRegras = 0;
         for (int i = 0; i < regras.avaliacoes.Length; i++)
         {
@@ -54,8 +66,9 @@ public class SistemaPontuacao : MonoBehaviour
                 {
                     case 0:
                         if (regras.idade < 45 ? regras.idade > passageiroExaminado.idade : regras.idade < passageiroExaminado.idade)
-                        {                           
-                            AumentarDiminuirPontos(-5, 5);
+                        {
+                            AumentarDiminuirPontos(-15, 5);
+                            AumentarScore(15);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -64,13 +77,14 @@ public class SistemaPontuacao : MonoBehaviour
                         else
                         {
                             if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else AumentarDiminuirPontos(5, 5);
+                            else AumentarDiminuirPontos(10, 5); 
                         }
                         break;
                     case 1:
                         if (regras.altura < 1.7f ? regras.altura > passageiroExaminado.altura : regras.altura < passageiroExaminado.altura)
                         {
-                            AumentarDiminuirPontos(-5, 5);
+                            AumentarDiminuirPontos(-15, 5);
+                            AumentarScore(15);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -79,13 +93,14 @@ public class SistemaPontuacao : MonoBehaviour
                         else
                         {
                             if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else AumentarDiminuirPontos(5, 5);
+                            else AumentarDiminuirPontos(10, 5);
                         }
                         break;
                     case 2:
                         if (regras.destino == passageiroExaminado.destino)
                         {
-                            AumentarDiminuirPontos(-5, 5);
+                            AumentarDiminuirPontos(-15, 5);
+                            AumentarScore(15);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -98,7 +113,7 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else AumentarDiminuirPontos(5, 5);
+                            else AumentarDiminuirPontos(10, 5);
 
                         }
 
@@ -106,7 +121,8 @@ public class SistemaPontuacao : MonoBehaviour
                     case 3:
                         if (!passageiroExaminado.fotoCorresponde)
                         {
-                            AumentarDiminuirPontos(-5, 5);
+                            AumentarDiminuirPontos(-15, 5);
+                            AumentarScore(15);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -119,13 +135,14 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else AumentarDiminuirPontos(5, 5);
+                            else AumentarDiminuirPontos(10, 5);
                         }
                         break;
                     case 4:
                         if (regras.timeFutebol == passageiroExaminado.timeFutebol)
                         {
-                            AumentarDiminuirPontos(-5, 5);
+                            AumentarDiminuirPontos(-15, 5);
+                            AumentarScore(15);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -138,13 +155,14 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else AumentarDiminuirPontos(5, 5);
+                            else AumentarDiminuirPontos(10, 5);
                         }
                         break;
                     case 5:
                         if (regras.profissao == passageiroExaminado.profissao)
                         {
-                            AumentarDiminuirPontos(-5, 5);
+                            AumentarDiminuirPontos(-15, 5);
+                            AumentarScore(15);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -157,13 +175,14 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else AumentarDiminuirPontos(5, 5);
+                            else AumentarDiminuirPontos(10, 5);
                         }
                         break;
                     case 6:
                         if (regras.geracaoPokemon == passageiroExaminado.geracaoPokemon)
                         {
-                            AumentarDiminuirPontos(-5, 5);
+                            AumentarDiminuirPontos(-15, 5);
+                            AumentarScore(15);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -176,13 +195,14 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else AumentarDiminuirPontos(5, 5);
+                            else AumentarDiminuirPontos(10, 5);
                         }
                         break;
                     case 7:
                         if (regras.roleLOL == passageiroExaminado.roleLOL)
                         {
-                            AumentarDiminuirPontos(-5, 5);
+                            AumentarDiminuirPontos(-15, 5);
+                            AumentarScore(15);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -195,13 +215,14 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else AumentarDiminuirPontos(5, 5);
+                            else AumentarDiminuirPontos(10, 5);
                         }
                         break;
                     case 8:
                         if (regras.acessorios == passageiroExaminado.acessorios && !passageiroExaminado.naoPossuiAcc)
                         {
-                            AumentarDiminuirPontos(-5, 5);
+                            AumentarDiminuirPontos(-15, 5);
+                            AumentarScore(15);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -214,13 +235,16 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else AumentarDiminuirPontos(5, 5);
+                            else AumentarDiminuirPontos(10, 5);
                         }
                         break;
                   
                 }
             }
         }
+        
+        AumentarScore(45);
+        
         Vector3 posicao = passageiroExaminado.transform.position;
         Destroy(passageiroExaminado.gameObject);
         Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], posicao, Quaternion.identity);
@@ -250,7 +274,7 @@ public class SistemaPontuacao : MonoBehaviour
                         if (regras.idade < 45 ? regras.idade > passageiroExaminado.idade : regras.idade < passageiroExaminado.idade)
                         {
                             AumentarDiminuirPontos(5, -5);
-                            AumentarScore();
+                            AumentarScore(45);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -266,7 +290,7 @@ public class SistemaPontuacao : MonoBehaviour
                         if (regras.altura < 1.7f ? regras.altura > passageiroExaminado.altura : regras.altura < passageiroExaminado.altura)
                         {
                             AumentarDiminuirPontos(5, -5);
-                            AumentarScore();
+                            AumentarScore(45);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -282,7 +306,7 @@ public class SistemaPontuacao : MonoBehaviour
                         if (regras.destino == passageiroExaminado.destino)
                         {
                             AumentarDiminuirPontos(5, -5);
-                            AumentarScore();
+                            AumentarScore(45);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -300,7 +324,7 @@ public class SistemaPontuacao : MonoBehaviour
                         if (!passageiroExaminado.fotoCorresponde)
                         {
                             AumentarDiminuirPontos(5, -5);
-                            AumentarScore();
+                            AumentarScore(45);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -316,7 +340,7 @@ public class SistemaPontuacao : MonoBehaviour
                         if (regras.timeFutebol == passageiroExaminado.timeFutebol)
                         {
                             AumentarDiminuirPontos(5, -5);
-                            AumentarScore();
+                            AumentarScore(45);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -332,7 +356,7 @@ public class SistemaPontuacao : MonoBehaviour
                         if (regras.profissao == passageiroExaminado.profissao)
                         {
                             AumentarDiminuirPontos(5, -5);
-                            AumentarScore();
+                            AumentarScore(45);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -348,7 +372,7 @@ public class SistemaPontuacao : MonoBehaviour
                         if (regras.geracaoPokemon == passageiroExaminado.geracaoPokemon)
                         {
                             AumentarDiminuirPontos(5, -5);
-                            AumentarScore();
+                            AumentarScore(45);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -364,7 +388,7 @@ public class SistemaPontuacao : MonoBehaviour
                         if (regras.roleLOL == passageiroExaminado.roleLOL)
                         {
                             AumentarDiminuirPontos(5, -5);
-                            AumentarScore();
+                            AumentarScore(45);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -380,7 +404,7 @@ public class SistemaPontuacao : MonoBehaviour
                         if (regras.acessorios == passageiroExaminado.acessorios)
                         {
                             AumentarDiminuirPontos(5, -5);
-                            AumentarScore();
+                            AumentarScore(45);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -396,11 +420,24 @@ public class SistemaPontuacao : MonoBehaviour
                 }
             }
         }
+        AumentarScore(15);
         Vector3 posicao = passageiroExaminado.transform.position;
         Destroy(passageiroExaminado.gameObject);
         Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], posicao, Quaternion.identity);
     }
 
+
+    public void CobrarDinheiro()
+    {
+        cobrancaGO.SetActive(true);
+        cobrancaGO.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + passageiroExaminado.moedasInt;
+        cobrancaGO.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "x" + passageiroExaminado.moedasMei;
+    }
+
+    public void FecharCobrança()
+    {
+        cobrancaGO.SetActive(false);
+    }
 
     public void AumentarDiminuirPontos(int pChefe, int pPublico)
     {
@@ -413,8 +450,8 @@ public class SistemaPontuacao : MonoBehaviour
         pontosPublicoSlider.value = (float)pontosPublico/100;
     }
 
-    public void AumentarScore() {
-        score += 50;
+    public void AumentarScore(int scoreGained) {
+        score += scoreGained;
         scoreText.text = score.ToString();
     }
    

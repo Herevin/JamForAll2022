@@ -56,13 +56,11 @@ public class Passageiro : MonoBehaviour
     public Acessorios acessorios;
     [SerializeField] public bool naoPossuiAcc;
 
-    public enum TipoPagamento
-    {
-        Cartão,
-        Dinheiro
-    }
-    public TipoPagamento tipoPagamento;
+   
+   
     public float dinheiroParaPassagem;
+    public int moedasInt;
+    public int moedasMei;
     [HideInInspector] public SpriteRenderer mySR;
     [SerializeField] public Sprite[] mySpriteVariants;
     //0 - Oculos
