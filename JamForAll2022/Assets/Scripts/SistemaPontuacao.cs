@@ -1,29 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SistemaPontuacao : MonoBehaviour
 {
     [SerializeField] private int pontosChefe = 50;
     [SerializeField] private int pontosPublico = 50;
     [SerializeField] private GameObject proximoPassageiro;
+    [SerializeField] private Slider pontosChefeSlider;
+    [SerializeField] private Slider pontosPublicoSlider;
 
     public Passageiro passageiroExaminado;
-    [SerializeField]RegrasChefe regras;
+    [SerializeField] RegrasChefe regras;
 
     //Idade              0
     //Altura             1
-    //Forma Pagamento    2
-    //Quantia Dinheiro   3
-    //Cor da Roupa       4
-    //Time Futebol       5
+    //Destino            2
+    //Foto               3
+    //Time Futebol       4
     //Profissao          6
     //Geracao Pokemon    7
     //Role no LOL        8
-    //Cor Cabelo         9
-    //Acessorio          10
+    //Acessorio          9
+    //Forma Pagamento    10
+    //Quantia Dinheiro   11
 
-
+    private void Start()
+    {     
+        pontosChefeSlider.value = (float)pontosChefe/100;
+        pontosPublicoSlider.value = (float)pontosPublico/100;
+    }
     public void AceitarPassageiro()
     {
         int quantidadeRegras = 0;
@@ -36,15 +43,15 @@ public class SistemaPontuacao : MonoBehaviour
 
 
         for (int i = 0; i < regras.avaliacoes.Length; i++)
-            {
+        {
             if (regras.avaliacoes[i])
             {
                 switch (i)
                 {
                     case 0:
-                        if (regras.idade < 45 ? regras.idade > passageiroExaminado.idade: regras.idade < passageiroExaminado.idade)
-                        {
-                            Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                        if (regras.idade < 45 ? regras.idade > passageiroExaminado.idade : regras.idade < passageiroExaminado.idade)
+                        {                           
+                            AumentarDiminuirPontos(-5, 5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -53,13 +60,13 @@ public class SistemaPontuacao : MonoBehaviour
                         else
                         {
                             if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else Debug.Log("ERROU MANO +5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(5, 5);
                         }
                         break;
                     case 1:
                         if (regras.altura < 1.7f ? regras.altura > passageiroExaminado.altura : regras.altura < passageiroExaminado.altura)
                         {
-                            Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(-5, 5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -68,13 +75,13 @@ public class SistemaPontuacao : MonoBehaviour
                         else
                         {
                             if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else Debug.Log("ERROU MANO +5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(5, 5);
                         }
                         break;
                     case 2:
-                        if (regras.tipoPagamento == passageiroExaminado.tipoPagamento)
+                        if (regras.destino == passageiroExaminado.destino)
                         {
-                            Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(-5, 5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -87,15 +94,15 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(5, 5);
 
                         }
 
                         break;
                     case 3:
-                        if (regras.tipoPagamento < passageiroExaminado.tipoPagamento)
+                        if (!passageiroExaminado.fotoCorresponde)
                         {
-                            Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(-5, 5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -108,13 +115,13 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(5, 5);
                         }
                         break;
                     case 4:
-                        if (regras.corRoupa == passageiroExaminado.corRoupa)
+                        if (regras.timeFutebol == passageiroExaminado.timeFutebol)
                         {
-                            Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(-5, 5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -127,13 +134,13 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(5, 5);
                         }
                         break;
                     case 5:
-                        if (regras.timeFutebol == passageiroExaminado.timeFutebol)
+                        if (regras.profissao == passageiroExaminado.profissao)
                         {
-                            Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(-5, 5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -146,13 +153,13 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(5, 5);
                         }
                         break;
                     case 6:
-                        if (regras.profissao == passageiroExaminado.profissao)
+                        if (regras.geracaoPokemon == passageiroExaminado.geracaoPokemon)
                         {
-                            Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(-5, 5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -165,13 +172,13 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(5, 5);
                         }
                         break;
                     case 7:
-                        if (regras.geracaoPokemon == passageiroExaminado.geracaoPokemon)
+                        if (regras.roleLOL == passageiroExaminado.roleLOL)
                         {
-                            Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(-5, 5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -184,52 +191,13 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(5, 5);
                         }
                         break;
                     case 8:
-                        if (regras.roleLOL == passageiroExaminado.roleLOL)
-                        {
-                            Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
-                            Vector3 temp = passageiroExaminado.transform.position;
-                            Destroy(passageiroExaminado.gameObject);
-                            Instantiate(proximoPassageiro, temp, Quaternion.identity);
-                            return;
-                        }
-                        else
-                        {
-                            if (quantidadeRegras > 1)
-                            {
-                                quantidadeRegras -= 1;
-                                break;
-                            }
-                            else Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
-                        }
-                        break;
-                    case 9:
-                        if (regras.corCabelo == passageiroExaminado.corCabelo)
-                        {
-                            Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
-                            Vector3 temp = passageiroExaminado.transform.position;
-                            Destroy(passageiroExaminado.gameObject);
-                            Instantiate(proximoPassageiro, temp, Quaternion.identity);
-                            return;
-                        }
-                        else
-                        {
-                            if (quantidadeRegras > 1)
-                            {
-                                quantidadeRegras -= 1;
-                                break;
-                            }
-                            else Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
-                        }
-
-                        break;
-                    case 10:
                         if (regras.acessorios == passageiroExaminado.acessorios)
                         {
-                            Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(-5, 5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -242,16 +210,16 @@ public class SistemaPontuacao : MonoBehaviour
                                 quantidadeRegras -= 1;
                                 break;
                             }
-                            else Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(5, 5);
                         }
                         break;
-
+                  
                 }
             }
         }
         Vector3 posicao = passageiroExaminado.transform.position;
         Destroy(passageiroExaminado.gameObject);
-        Instantiate(proximoPassageiro,posicao,Quaternion.identity);
+        Instantiate(proximoPassageiro, posicao, Quaternion.identity);
 
 
 
@@ -275,9 +243,9 @@ public class SistemaPontuacao : MonoBehaviour
                 switch (i)
                 {
                     case 0:
-                        if (regras.idade < 45 ? regras.idade  > passageiroExaminado.idade : regras.idade < passageiroExaminado.idade)
+                        if (regras.idade < 45 ? regras.idade > passageiroExaminado.idade : regras.idade < passageiroExaminado.idade)
                         {
-                            Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(5, -5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -286,13 +254,13 @@ public class SistemaPontuacao : MonoBehaviour
                         else
                         {
                             if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(-5, -5);
                         }
                         break;
                     case 1:
                         if (regras.altura < 1.7f ? regras.altura > passageiroExaminado.altura : regras.altura < passageiroExaminado.altura)
                         {
-                            Debug.Log("ACERTOU MANO -5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(5, -5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -301,13 +269,13 @@ public class SistemaPontuacao : MonoBehaviour
                         else
                         {
                             if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else Debug.Log("ERROU MANO +5 PONTOS COM O CHEFIA && +5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(-5, -5);
                         }
                         break;
                     case 2:
-                        if (regras.tipoPagamento == passageiroExaminado.tipoPagamento)
+                        if (regras.destino == passageiroExaminado.destino)
                         {
-                            Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(5, -5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -316,15 +284,15 @@ public class SistemaPontuacao : MonoBehaviour
                         else
                         {
                             if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else  Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(-5, -5);
                         }
 
 
                         break;
                     case 3:
-                        if (regras.tipoPagamento < passageiroExaminado.tipoPagamento)
+                        if (!passageiroExaminado.fotoCorresponde)
                         {
-                            Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(5, -5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -333,13 +301,13 @@ public class SistemaPontuacao : MonoBehaviour
                         else
                         {
                             if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else  Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(-5, -5);
                         }
                         break;
                     case 4:
-                        if (regras.corRoupa == passageiroExaminado.corRoupa)
+                        if (regras.timeFutebol == passageiroExaminado.timeFutebol)
                         {
-                            Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(5, -5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -348,13 +316,13 @@ public class SistemaPontuacao : MonoBehaviour
                         else
                         {
                             if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(-5, -5);
                         }
                         break;
                     case 5:
-                        if (regras.timeFutebol == passageiroExaminado.timeFutebol)
+                        if (regras.profissao == passageiroExaminado.profissao)
                         {
-                            Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(5, -5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -363,13 +331,13 @@ public class SistemaPontuacao : MonoBehaviour
                         else
                         {
                             if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(-5, -5);
                         }
                         break;
                     case 6:
-                        if (regras.profissao == passageiroExaminado.profissao)
+                        if (regras.geracaoPokemon == passageiroExaminado.geracaoPokemon)
                         {
-                            Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(5, -5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -378,13 +346,13 @@ public class SistemaPontuacao : MonoBehaviour
                         else
                         {
                             if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else  Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(-5, -5);
                         }
                         break;
                     case 7:
-                        if (regras.geracaoPokemon == passageiroExaminado.geracaoPokemon)
+                        if (regras.roleLOL == passageiroExaminado.roleLOL)
                         {
-                            Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(5, -5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -393,44 +361,13 @@ public class SistemaPontuacao : MonoBehaviour
                         else
                         {
                             if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(-5, -5);
                         }
                         break;
                     case 8:
-                        if (regras.roleLOL == passageiroExaminado.roleLOL)
-                        {
-                            Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
-                            Vector3 temp = passageiroExaminado.transform.position;
-                            Destroy(passageiroExaminado.gameObject);
-                            Instantiate(proximoPassageiro, temp, Quaternion.identity);
-                            return;
-                        }
-                        else
-                        {
-                            if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
-                        }
-                        break;
-                    case 9:
-                        if (regras.corCabelo == passageiroExaminado.corCabelo)
-                        {
-                            Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
-                            Vector3 temp = passageiroExaminado.transform.position;
-                            Destroy(passageiroExaminado.gameObject);
-                            Instantiate(proximoPassageiro, temp, Quaternion.identity);
-                            return;
-                        }
-                        else
-                        {
-                            if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
-                        }
-
-                        break;
-                    case 10:
                         if (regras.acessorios == passageiroExaminado.acessorios)
                         {
-                            Debug.Log("ACERTOU MANO +5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            AumentarDiminuirPontos(5, -5);
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro, temp, Quaternion.identity);
@@ -439,10 +376,10 @@ public class SistemaPontuacao : MonoBehaviour
                         else
                         {
                             if (quantidadeRegras > 1) quantidadeRegras -= 1;
-                            else  Debug.Log("ERROU MANO -5 PONTOS COM O CHEFIA && -5 PONTOS COM O PUBLICO");
+                            else AumentarDiminuirPontos(-5, -5);
                         }
                         break;
-
+                   
                 }
             }
         }
@@ -451,6 +388,15 @@ public class SistemaPontuacao : MonoBehaviour
         Instantiate(proximoPassageiro, posicao, Quaternion.identity);
     }
 
+
+    public void AumentarDiminuirPontos(int pChefe, int pPublico)
+    {
+        pontosChefe += pChefe;
+        pontosPublico += pPublico;
+
+        pontosChefeSlider.value = (float)pontosChefe/100;
+        pontosPublicoSlider.value = (float)pontosPublico/100;
+    }
    
 
 }

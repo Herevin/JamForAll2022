@@ -7,24 +7,26 @@ public class RegrasChefe : Passageiro
 {
     //Idade              0
     //Altura             1
-    //Forma Pagamento    2
-    //Quantia Dinheiro   3
-    //Cor da Roupa       4
-    //Time Futebol       5
-    //Profissao          6
-    //Geracao Pokemon    7
-    //Role no LOL        8
-    //Cor Cabelo         9
-    //Acessorio          10
+    //Destino            2
+    //Foto               3
+    //Time Futebol       4
+    //Profissao          5
+    //Geracao Pokemon    6
+    //Role no LOL        7
+    //Acessorio          8
 
 
-    [HideInInspector]public bool[] avaliacoes = new bool[11];
+    //Forma Pagamento  
+    //Quantia Dinheiro 
+
+
+    [HideInInspector]public bool[] avaliacoes = new bool[9];
 
     [SerializeField] private TextMeshProUGUI[] regras;
 
     private void Start()
     {
-        RandomizarRegra(2);
+        RandomizarRegra(3);
     }
     public void RandomizarRegra(int quantidade)
     {
@@ -69,9 +71,9 @@ public class RegrasChefe : Passageiro
                             break;
                         }
                     avaliacoes[randomizador] = true;
-                    tipoPagamento = (TipoPagamento)Random.Range(0, 2);
+                    destino = (Destino)Random.Range(0, 3);
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = tipoPagamento.ToString();
+                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = destino.ToString();
                     break;
                 case 3:
                     if (avaliacoes[randomizador]) 
@@ -79,82 +81,61 @@ public class RegrasChefe : Passageiro
                             quantidade += 1;
                             break;
                         }
-                    avaliacoes[randomizador] = true;
-                    dinheiroParaPassagem += Random.Range(1, 3);
-                    dinheiroParaPassagem -= Random.Range(1, 3);
+                    avaliacoes[randomizador] = true;                  
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = dinheiroParaPassagem.ToString();
+                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = "Foto falsas";
                     break;
                 case 4:
-                    if (avaliacoes[randomizador]) 
-                        {
-                            quantidade += 1;
-                            break;
-                        }
-                    avaliacoes[randomizador] = true;
-                    corRoupa = (CorDaRoupa)Random.Range(0, 3);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = corRoupa.ToString();
-                    break;
-                case 5:
-                    if (avaliacoes[randomizador]) 
-                        {
-                            quantidade += 1;
-                            break;
-                        }
-                    avaliacoes[randomizador] = true;
-                    timeFutebol = (TimeFutebol)Random.Range(0, 3);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = timeFutebol.ToString();
-                    break;
-                case 6:
-                    if (avaliacoes[randomizador])
-                        {
-                            quantidade += 1;
-                            break;
-                        }
-                    avaliacoes[randomizador] = true;
-                    profissao = (Profissao)Random.Range(0, 3);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = profissao.ToString();
-                    break;
-                case 7:
-                    if (avaliacoes[randomizador]) 
-                        {
-                            quantidade += 1;
-                            break;
-                        }
-                    avaliacoes[randomizador] = true;
-                    geracaoPokemon = (GeracaoPokemon)Random.Range(0, 8);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = geracaoPokemon.ToString();
-                    break;
-                case 8:
-                    if (avaliacoes[randomizador]) 
-                        {
-                            quantidade += 1;
-                            break;
-                        }
-                    avaliacoes[randomizador] = true;
-                    roleLOL = (RoleLOL)Random.Range(0, 5);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = roleLOL.ToString();
-                    break;
-                case 9:
                     if (avaliacoes[randomizador])
                     {
                         quantidade += 1;
                         break;
                     }
                     avaliacoes[randomizador] = true;
-                    corCabelo = (CorDoCabelo)Random.Range(0, 3);
+                    timeFutebol = (TimeFutebol)Random.Range(0, 3);
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
-                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = corCabelo.ToString();
+                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = timeFutebol.ToString();
                     break;
-                case 10:
+                    
+                case 5:
                     if (avaliacoes[randomizador])
                     {
-                        quantidade += 1; 
+                        quantidade += 1;
+                        break;
+                    }
+                    avaliacoes[randomizador] = true;
+                    profissao = (Profissao)Random.Range(0, 3);
+                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
+                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = profissao.ToString();
+                    break;
+                case 6:
+                    if (avaliacoes[randomizador])
+                    {
+                        quantidade += 1;
+                        break;
+                    }
+                    avaliacoes[randomizador] = true;
+                    geracaoPokemon = (GeracaoPokemon)Random.Range(0, 8);
+                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
+                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = geracaoPokemon.ToString();
+                    break;
+                    
+                case 7:
+                    if (avaliacoes[randomizador])
+                    {
+                        quantidade += 1;
+                        break;
+                    }
+                    avaliacoes[randomizador] = true;
+                    roleLOL = (RoleLOL)Random.Range(0, 5);
+                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
+                    regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = roleLOL.ToString();
+                    break;
+                    
+                case 8:
+                    if (avaliacoes[randomizador])
+                    {
+                        quantidade += 1;
                         break;
                     }
                     avaliacoes[randomizador] = true;
@@ -162,7 +143,7 @@ public class RegrasChefe : Passageiro
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = acessorios.ToString();
                     break;
-
+             
             }
             quantidade--;
         }
