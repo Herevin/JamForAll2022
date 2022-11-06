@@ -391,8 +391,10 @@ public class SistemaPontuacao : MonoBehaviour
 
     public void AumentarDiminuirPontos(int pChefe, int pPublico)
     {
-        pontosChefe += pChefe;
-        pontosPublico += pPublico;
+        if (pontosChefe + pChefe < 100) pontosChefe += pChefe;
+        else if (pontosChefe + pChefe > 100) pontosChefe = 100;
+        if (pontosPublico + pPublico < 100) pontosPublico += pPublico;
+        else if (pontosPublico + pPublico > 100) pontosPublico = 100;
 
         pontosChefeSlider.value = (float)pontosChefe/100;
         pontosPublicoSlider.value = (float)pontosPublico/100;
