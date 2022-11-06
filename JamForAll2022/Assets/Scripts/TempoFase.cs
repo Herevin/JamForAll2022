@@ -8,10 +8,13 @@ public class TempoFase : MonoBehaviour
 {
     public int minutos;
     public int segundos;
+    static int dia;
     [SerializeField]
     private Text textoMinutos;
     [SerializeField]
     private Text textoSegundos;
+    [SerializeField]
+    private Text textoDia;
 
     void Start()
     {
@@ -28,14 +31,25 @@ public class TempoFase : MonoBehaviour
             segundos = 59;
         }
 
+        if(minutos <= 2) {
+            //Condicao
+        }
+
         if(minutos <= 0 && segundos <= 1){
             ReiniciarBotao();
         }
     }
 
     public void ReiniciarBotao() {
+        textoDia.text = dia.ToString();
+        dia++;
+        Dia();
         SceneManager.LoadScene("TransicaoDia");
         Time.timeScale = 1;
+    }
+
+    public void Dia(){
+        if(dia >= 1) Debug.Log("Dia");
     }
 
     IEnumerator Contar() {
