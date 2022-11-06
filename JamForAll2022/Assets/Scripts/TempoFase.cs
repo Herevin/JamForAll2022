@@ -22,6 +22,7 @@ public class TempoFase : MonoBehaviour
         StartCoroutine("Contar");
         textoDia.text = dia.ToString();
         randomTraits = GameObject.FindObjectOfType<RegrasChefe>();
+        Debug.Log(dia);
     }
 
     void Update()
@@ -40,6 +41,12 @@ public class TempoFase : MonoBehaviour
 
         if(minutos == 2 && segundos == 1) {
             ChamarTraitsNovas();
+        }
+
+        if(dia == 0 || dia == 1) {
+            if(minutos == 2 && segundos == 1) {
+                ChamarTraitsNovas();
+            }
         }
 
         if(dia == 2 || dia == 3) {
