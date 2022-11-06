@@ -71,7 +71,7 @@ public class RegrasChefe : Passageiro
                             break;
                         }
                     avaliacoes[randomizador] = true;
-                    destino = (Destino)Random.Range(0, 3);
+                    destino = (Destino)Random.Range(0, 5);
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = destino.ToString();
                     break;
@@ -92,7 +92,7 @@ public class RegrasChefe : Passageiro
                         break;
                     }
                     avaliacoes[randomizador] = true;
-                    timeFutebol = (TimeFutebol)Random.Range(0, 3);
+                    timeFutebol = (TimeFutebol)Random.Range(0, 5);
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = timeFutebol.ToString();
                     break;
@@ -104,7 +104,7 @@ public class RegrasChefe : Passageiro
                         break;
                     }
                     avaliacoes[randomizador] = true;
-                    profissao = (Profissao)Random.Range(0, 3);
+                    profissao = (Profissao)Random.Range(0, 5);
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = profissao.ToString();
                     break;
@@ -139,7 +139,7 @@ public class RegrasChefe : Passageiro
                         break;
                     }
                     avaliacoes[randomizador] = true;
-                    acessorios = (Acessorios)Random.Range(0, 3);
+                    acessorios = (Acessorios)Random.Range(0, 5);
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].gameObject.SetActive(true);
                     regras[Mathf.Abs(totalRegras - (quantidade - 1))].text = acessorios.ToString();
                     break;
