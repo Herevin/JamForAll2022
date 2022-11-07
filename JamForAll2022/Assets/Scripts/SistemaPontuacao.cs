@@ -16,6 +16,12 @@ public class SistemaPontuacao : MonoBehaviour
     [SerializeField] private static int score;
     [SerializeField] private Text scoreText;
 
+    [SerializeField] private GameObject afonsoErrorGO;
+    [SerializeField] private TextMeshProUGUI afonsoErrorText;
+    [SerializeField] private GameObject aristeuErrorGO;
+    [SerializeField] private TextMeshProUGUI aristeuErrorText;
+
+
     public Passageiro passageiroExaminado;
     [SerializeField] RegrasChefe regras;
 
@@ -67,8 +73,18 @@ public class SistemaPontuacao : MonoBehaviour
                     case 0:
                         if (regras.idade < 45 ? regras.idade > passageiroExaminado.idade : regras.idade < passageiroExaminado.idade)
                         {
-                            AumentarDiminuirPontos(-15, 5);
+                            AumentarDiminuirPontos(-15, 5);                           
                             AumentarScore(15);
+                            if (regras.aristeu)
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "A IDADE DO PASSAGEIRO NÃO ERA PERMETIDA!!";
+                            }
+                            else
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "A IDADE DO PASSAGEIRO NÃO ERA PERMETIDA...";
+                            }
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -85,6 +101,16 @@ public class SistemaPontuacao : MonoBehaviour
                         {
                             AumentarDiminuirPontos(-15, 5);
                             AumentarScore(15);
+                            if (regras.aristeu)
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "A ALTURA DO PASSAGEIRO NÃO ERA PERMETIDA!!";
+                            }
+                            else
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "A ALTURA DO PASSAGEIRO NÃO ERA PERMETIDA...";
+                            }
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -101,6 +127,16 @@ public class SistemaPontuacao : MonoBehaviour
                         {
                             AumentarDiminuirPontos(-15, 5);
                             AumentarScore(15);
+                            if (regras.aristeu)
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "O DESTINO DO PASSAGEIRO É O PIOR LUGAR EXISTENTE!!";
+                            }
+                            else
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "O DESTINO DO PASSAGEIRO É O PIOR LUGAR EXISTENTE...";
+                            }
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -123,6 +159,16 @@ public class SistemaPontuacao : MonoBehaviour
                         {
                             AumentarDiminuirPontos(-15, 5);
                             AumentarScore(15);
+                            if (regras.aristeu)
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "A FOTO DO PASSAGEIRO NÃO ESTAVA A MEU GOSTO!!";
+                            }
+                            else
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "A FOTO DO PASSAGEIRO NÃO ESTAVA A MEU GOSTO...";
+                            }
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -143,6 +189,16 @@ public class SistemaPontuacao : MonoBehaviour
                         {
                             AumentarDiminuirPontos(-15, 5);
                             AumentarScore(15);
+                            if (regras.aristeu)
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "EU ODEIO O TIME QUE ESSE PASSAGEIRO GOSTAVA!!";
+                            }
+                            else
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "EU ODEIO O TIME QUE ESSE PASSAGEIRO GOSTAVA...";
+                            }
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -163,6 +219,16 @@ public class SistemaPontuacao : MonoBehaviour
                         {
                             AumentarDiminuirPontos(-15, 5);
                             AumentarScore(15);
+                            if (regras.aristeu)
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "A PROFISSÃO DO PASSAGEIRO NÃO EXISTE!!";
+                            }
+                            else
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "A PROFISSÃO DO PASSAGEIRO NÃO EXISTE...";
+                            }
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -183,6 +249,16 @@ public class SistemaPontuacao : MonoBehaviour
                         {
                             AumentarDiminuirPontos(-15, 5);
                             AumentarScore(15);
+                            if (regras.aristeu)
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = passageiroExaminado.geracaoPokemon.ToString() +"?!!  SÉRIO MESMO!?";
+                            }
+                            else
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = passageiroExaminado.geracaoPokemon.ToString() + "...?  SÉRIO MESMO...?";
+                            }
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -203,6 +279,16 @@ public class SistemaPontuacao : MonoBehaviour
                         {
                             AumentarDiminuirPontos(-15, 5);
                             AumentarScore(15);
+                            if (regras.aristeu)
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "ESSA ROLE SEMPRE PERDE AS MINHAS PARTIDAS!!";
+                            }
+                            else
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "ESSA ROLE SEMPRE PERDE AS MINHAS PARTIDAS...";
+                            }
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -223,6 +309,16 @@ public class SistemaPontuacao : MonoBehaviour
                         {
                             AumentarDiminuirPontos(-15, 5);
                             AumentarScore(15);
+                            if (regras.aristeu)
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "O PASSAGEIRO ESTAVA USANDO UM ACESSÓRIO PROIBIDO!!";
+                            }
+                            else
+                            {
+                                afonsoErrorGO.SetActive(true);
+                                afonsoErrorText.text = "O PASSAGEIRO ESTAVA USANDO UM ACESSÓRIO PROIBIDO...";
+                            }
                             Vector3 temp = passageiroExaminado.transform.position;
                             Destroy(passageiroExaminado.gameObject);
                             Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], temp, Quaternion.identity);
@@ -421,6 +517,16 @@ public class SistemaPontuacao : MonoBehaviour
             }
         }
         AumentarScore(15);
+        if (regras.aristeu)
+        {
+            afonsoErrorGO.SetActive(true);
+            afonsoErrorText.text = "EU QUERIA AQUELE PASSAGEIRO NO MEU ÔNIBUS!!";
+        }
+        else
+        {
+            afonsoErrorGO.SetActive(true);
+            afonsoErrorText.text = "EU QUERIA AQUELE PASSAGEIRO NO MEU ÔNIBUS...";
+        }
         Vector3 posicao = passageiroExaminado.transform.position;
         Destroy(passageiroExaminado.gameObject);
         Instantiate(proximoPassageiro[Random.Range(0,proximoPassageiro.Length)], posicao, Quaternion.identity);
