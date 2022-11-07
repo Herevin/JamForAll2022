@@ -49,6 +49,16 @@ public class SistemaPontuacao : MonoBehaviour
         {
             AumentarDiminuirPontos(-15, 5);
             AumentarScore(15);
+            if (regras.aristeu)
+            {
+                afonsoErrorGO.SetActive(true);
+                afonsoErrorText.text = "O PASSAGEIRO ERA UM PLEBE!!";
+            }
+            else
+            {
+                afonsoErrorGO.SetActive(true);
+                afonsoErrorText.text = "O PASSAGEIRO ERA UM PLEBE...";
+            }
             Vector3 temp = passageiroExaminado.transform.position;
             Destroy(passageiroExaminado.gameObject);
             Instantiate(proximoPassageiro[Random.Range(0, proximoPassageiro.Length)], temp, Quaternion.identity);
