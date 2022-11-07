@@ -20,6 +20,10 @@ public class MenuManager : MonoBehaviour
         menuClicado.SetActive(true);
     }
 
+    public void AbrirCreditos() {
+        menuClicado.SetActive(true);
+    }
+
     public void Sair() {
         Application.Quit();
     }
