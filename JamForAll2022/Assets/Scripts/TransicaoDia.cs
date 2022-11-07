@@ -10,4 +10,14 @@ public class TransicaoDia : MonoBehaviour
             SceneManager.LoadScene("Jogo");
         }
     }
+
+    public void IrMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void JogarNovamente()
+    {
+        SceneManager.LoadScene("Jogo");
+    }
 }

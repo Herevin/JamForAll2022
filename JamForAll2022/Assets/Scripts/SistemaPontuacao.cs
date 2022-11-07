@@ -21,6 +21,9 @@ public class SistemaPontuacao : MonoBehaviour
     [SerializeField] private GameObject aristeuErrorGO;
     [SerializeField] private TextMeshProUGUI aristeuErrorText;
 
+    [SerializeField] private GameObject telaDeMorte;
+    [SerializeField] private TextMeshProUGUI pontuaao;
+
 
     public Passageiro passageiroExaminado;
     [SerializeField] RegrasChefe regras;
@@ -555,12 +558,27 @@ public class SistemaPontuacao : MonoBehaviour
         cobrancaGO.SetActive(false);
     }
 
+    private void GameOver()
+    {
+        telaDeMorte.SetActive(true);
+        pontuaao.text = "Pontuação" + "\n" + score.ToString();
+        AudioSource[] allAudios = GameObject.FindObjectsOfType<AudioSource>();
+
+        for (int i = 0; i < allAudios.Length; i++)
+        {
+            allAudios[i].Stop();
+        }
+    }
+
     public void AumentarDiminuirPontos(int pChefe, int pPublico)
     {
         if (pontosChefe + pChefe < 100) pontosChefe += pChefe;
         else if (pontosChefe + pChefe > 100) pontosChefe = 100;
         if (pontosPublico + pPublico < 100) pontosPublico += pPublico;
         else if (pontosPublico + pPublico > 100) pontosPublico = 100;
+
+        if (pontosChefe + pChefe <= 0) GameOver();
+        if (pontosPublico + pPublico <= 0) GameOver();
 
         pontosChefeSlider.value = (float)pontosChefe/100;
         pontosPublicoSlider.value = (float)pontosPublico/100;

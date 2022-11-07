@@ -8,6 +8,7 @@ public class DesligarAutomatico : MonoBehaviour
     void OnEnable()
     {
         StartCoroutine(Desativar());
+        GetComponent<AudioSource>().Play();
     }
 
    IEnumerator Desativar()
