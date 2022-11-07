@@ -5,7 +5,7 @@ using UnityEngine;
 public class DesligarAutomatico : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(Desativar());
     }
