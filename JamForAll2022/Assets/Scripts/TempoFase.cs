@@ -17,6 +17,8 @@ public class TempoFase : MonoBehaviour
     public Text textoDia;
     RegrasChefe randomTraits;
 
+    bool chamouDoDia;
+
     void Start()
     {
         StartCoroutine("Contar");
@@ -78,6 +80,13 @@ public class TempoFase : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    IEnumerator JaChamouRegras()
+    {
+        chamouDoDia = true;
+        yield return new WaitForSeconds(1.5f);
+        chamouDoDia = false;
+    }
+
     IEnumerator Contar() {
         while(segundos <= 59) {
             yield return new WaitForSeconds(1);
@@ -87,6 +96,28 @@ public class TempoFase : MonoBehaviour
     }
 
     public void ChamarTraitsNovas() {
-        randomTraits.RandomizarRegra(3);
+        if (chamouDoDia) return;
+
+        StartCoroutine(JaChamouRegras());
+
+        switch (TempoFase.dia)
+        {
+            case 0:
+                randomTraits.RandomizarRegra(3);
+                break;
+            case 1:
+                randomTraits.RandomizarRegra(4);
+                break;
+            case 2:
+                randomTraits.RandomizarRegra(5);
+                break;
+            case 3:
+                randomTraits.RandomizarRegra(6);
+                break;
+            default:
+                randomTraits.RandomizarRegra(7);
+                break;
+        }
+        
     }
 }
